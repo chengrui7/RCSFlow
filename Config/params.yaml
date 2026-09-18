@@ -1,0 +1,68 @@
+exp:
+  exp_name: 'rcof_6'
+  cuda_device: '0,1,2,3'     # 
+  mode: 'train'
+  no_cuda: false
+  num_workers: 4
+  seed: 1234
+  train_seq: ['2','6','7','8','14','15','16','19','20','23','42','44','46','56']  
+  val_seq: ['2',,'7','8','46','56']  
+  # test_seq: ['1','5','9','13','21','27','35','38','54','55']
+path:
+  data_path: '/data/K-Radar/RCOF/data'
+  calib_path: '/data/K-Radar/resources/cam_front0.yml'
+  polararr_path: '/data/K-Radar/resources/info_arr.mat'
+  dopplerarr_path: '/data/K-Radar/resources/arr_doppler.mat'
+model:
+  image: 
+    input_channel: 3
+    encoder_inplane: 32 
+  radar: 
+    range_dim: 128
+    azimuth_dim: 96
+    elevation_dim: 32
+    sparse_channel: 8
+    sparse_inplane: 32
+    patch_channel: 32
+    patch_numheads: 4
+    patch_numlayers: 2
+  rida:
+    num_layers: 2
+    embedding_dims: 384
+    num_levels: 4
+    num_points: 8
+    num_heads: 4
+    feedforward_channels: 1024
+    ffn_dropout: 0.
+    ffn_num_fcs: 2
+  pcda: 
+    num_layers: 2
+    embedding_dims: 96
+    num_levels: 1
+    num_points: 8
+    num_heads: 4
+    feedforward_channels: 512
+    ffn_dropout: 0. 
+    ffn_num_fcs: 2
+  occ:
+    voxel: 0.4
+    range:  [1,-25.6,-1.9,52.2,25.6,4.5]  #lidar[3.54, -25.6, -2.6, 54.74, 25.6, 3.8]
+    size:  [128, 128, 16]
+    encoder_depth: 10
+    encoder_inplanes: [64, 128, 256, 512]
+    corr_md: 4
+    num_layers: 1
+    embedding_dims: 96
+    num_levels: 1
+    num_points: 8
+    num_heads: 3
+    feedforward_channels: 512
+    ffn_dropout: 0.
+    ffn_num_fcs: 2
+  head:
+    num_cls: 3
+train:
+  batch_size: 1   # per GPU
+  epochs: 400
+  cosine: 5
+  lr: 0.001

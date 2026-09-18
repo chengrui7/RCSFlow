@@ -1,0 +1,10 @@
+scipy
+matplotlib
+open3d
+easydict
+opencv-python
+ruamel.yaml
+tensorboard
+tqdm
+pytorch-lightning
+timm
